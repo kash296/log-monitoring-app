@@ -1,7 +1,7 @@
 {
   "name": "log-monitoring-app",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/index.js",
   "type": "module",
   "imports": {
     "#src/*": "./src/*/index.js"
@@ -10,10 +10,18 @@
     "start": "node src/index.js",
     "test": "jest"
   },
+  "jest": {
+    "preset": "default",
+    "extensionsToTreatAsEsm": [".js"],
+    "globals": {
+      "global": {}
+    },
+    "transform": {}
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "Log monitoring application",
   "devDependencies": {
     "jest": "^29.0.0"
   }
