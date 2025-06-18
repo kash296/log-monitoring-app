@@ -1,4 +1,4 @@
-import fs from 'fs';
+const fs = require("fs");
 
 /*
     - Parses a single CSV log line into an object
@@ -75,4 +75,4 @@ function parseLogFile(filePath) {
     }
 }
 
-export { parseLogFile, parseLogLine };
+module.exports = { parseLogFile, parseLogLine };

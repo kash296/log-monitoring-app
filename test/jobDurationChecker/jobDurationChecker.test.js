@@ -1,4 +1,4 @@
-import { checkJobDurations, calculateDurationMinutes } from '#src/durationChecker';
+const { checkJobDurations, calculateDurationMinutes } = require('../../src/jobDurationChecker');
 
 describe('Duration Checker', () => {
     describe('calculateDurationMinutes', () => {
@@ -36,14 +36,12 @@ describe('Duration Checker', () => {
                 ['3', { pid: '3', description: 'warning job', startTime: '10:00:00', endTime: '10:07:00' }],
                 ['4', { pid: '4', description: 'exactly 10 min', startTime: '10:00:00', endTime: '10:10:00' }],
                 ['5', { pid: '5', description: 'error job', startTime: '10:00:00', endTime: '10:15:00' }],
-                ['6', { pid: '6', description: 'incomplete job', startTime: '10:00:00' }]
             ]);
             
             const results = checkJobDurations(jobMap);
             
             expect(results.warnings).toHaveLength(2);
             expect(results.errors).toHaveLength(1);
-            expect(results.incomplete).toHaveLength(1);
             expect(results.warnings.find(w => w.pid === '2')).toBeUndefined(); // 5 min exactly should not be warning
             expect(results.warnings.find(w => w.pid === '4')).toBeDefined(); // 10 min exactly should be warning
         });

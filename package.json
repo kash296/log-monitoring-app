@@ -2,21 +2,9 @@
   "name": "log-monitoring-app",
   "version": "1.0.0",
   "main": "src/index.js",
-  "type": "module",
-  "imports": {
-    "#src/*": "./src/*/index.js"
-  },
   "scripts": {
     "start": "node src/index.js",
     "test": "jest"
-  },
-  "jest": {
-    "preset": "default",
-    "extensionsToTreatAsEsm": [".js"],
-    "globals": {
-      "global": {}
-    },
-    "transform": {}
   },
   "keywords": [],
   "author": "",

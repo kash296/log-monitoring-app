@@ -1,5 +1,5 @@
-import { parseLogLine, parseLogFile } from "#src/parser";
-import path from "path";
+const { parseLogLine, parseLogFile } = require("../../src/parser");
+const path = require("path");
 
 describe("Log Parser", () => {
   test("should parse a single log line correctly", () => {
