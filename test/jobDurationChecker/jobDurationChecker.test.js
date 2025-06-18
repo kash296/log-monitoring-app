@@ -36,6 +36,8 @@ describe('Duration Checker', () => {
                 ['3', { pid: '3', description: 'warning job', startTime: '10:00:00', endTime: '10:07:00' }],
                 ['4', { pid: '4', description: 'exactly 10 min', startTime: '10:00:00', endTime: '10:10:00' }],
                 ['5', { pid: '5', description: 'error job', startTime: '10:00:00', endTime: '10:15:00' }],
+                ['6', { pid: '6', description: 'missing end', startTime: '10:00:00' }],
+                ['7', { pid: '7', description: 'missing start', endTime: '10:15:00' }]
             ]);
             
             const results = checkJobDurations(jobMap);
@@ -44,6 +46,9 @@ describe('Duration Checker', () => {
             expect(results.errors).toHaveLength(1);
             expect(results.warnings.find(w => w.pid === '2')).toBeUndefined(); // 5 min exactly should not be warning
             expect(results.warnings.find(w => w.pid === '4')).toBeDefined(); // 10 min exactly should be warning
+            expect(results.incomplete).toHaveLength(2); // missing end and missing start
+            expect(results.incomplete.find(i => i.pid === '6')).toBeDefined();
+            expect(results.incomplete.find(i => i.pid === '7')).toBeDefined();
         });
     });
 });

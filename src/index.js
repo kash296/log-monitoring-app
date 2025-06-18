@@ -20,6 +20,7 @@ function main() {
         console.log(`Total jobs: ${jobMap.size}`);
         console.log(`Warnings (>5 min): ${results.warnings.length}`);
         console.log(`Errors (>10 min): ${results.errors.length}`);
+        console.log(`Incomplete jobs: ${results.incomplete.length}`);
         
     } catch (error) {
         console.error('Error processing log file:', error.message);

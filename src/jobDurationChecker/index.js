@@ -24,11 +24,18 @@ function checkJobDurations(jobMap, warningThreshold = 5, errorThreshold = 10) {
     const results = {
         warnings: [],
         errors: [],
+        incomplete: []
     };
     
     for (let [pid, job] of jobMap) {
         // Check if job has both start and end times
         if (!job.startTime || !job.endTime) {
+            results.incomplete.push({
+                pid: job.pid,
+                description: job.description,
+                hasStart: !!job.startTime,
+                hasEnd: !!job.endTime
+            });
             continue;
         }
         
@@ -60,6 +67,14 @@ function checkJobDurations(jobMap, warningThreshold = 5, errorThreshold = 10) {
         console.log('\n--- ERRORS ---');
         results.errors.forEach(job => {
             console.error(`ERROR: Job ${job.pid} (${job.description}) took ${job.duration} minutes`);
+        });
+    }
+
+    //Prints out incomplete jobs
+    if (results.incomplete.length > 0) {
+        console.log('\n--- INCOMPLETE JOBS ---');
+        results.incomplete.forEach(job => {
+            console.log(`INCOMPLETE: Job ${job.pid} (${job.description}) - Missing ${!job.hasStart ? 'START' : 'END'}`);
         });
     }
     
